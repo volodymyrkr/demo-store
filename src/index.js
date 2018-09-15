@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {createStore} from "redux";
+import {combineReducers, createStore} from "redux";
 
 const APPLY_FILTER = "applyFilder";
 const DROP_FILTER = "dropFilder";
+
 const FILTER_ALL = "showAll";
 const FILTER_NEW = "showNew";
 const FILTER_COMPLETED = "showCompleted";
@@ -77,7 +78,7 @@ const filterReducer = (state = FILTER_ALL, action) => {
     }
 }
 
-const lastActionIndexReducer = (state = 0, action) => {
+const lastActionIndexReducer = (state = 1, action) => {
     switch (action.type) {
         case ADD_ITEM:
             return state+1;
@@ -86,14 +87,13 @@ const lastActionIndexReducer = (state = 0, action) => {
     }
 }
 
-const appReducer = (state = {actions: [], lastActionIndex: 1, filter: FILTER_ALL}, action) => {
-    return {
-        lastActionIndex: lastActionIndexReducer(state.lastActionIndex, action),
-        actions: listReducer(state.actions, action),
-        filter: filterReducer(state.filter, action)
+const appReducer = combineReducers(
+    {
+        lastActionIndex:lastActionIndexReducer,
+        filter: filterReducer,
+        actions: listReducer
     }
-
-}
+)
 const store = createStore(appReducer);
 
 export class ListOfItems extends Component {
