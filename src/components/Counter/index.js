@@ -7,24 +7,26 @@ class Counter extends Component {
             ...props
         }
     }
+
     shouldComponentUpdate(nextProps, nextState) {
-        return this.state.value!=nextState.value;
+        return this.state.value !== nextState.value;
     }
+
     clickIncreaseHandler = () => {
-        this.setState((prevState)=>({
-            ...this.state,
-            value: this.state.value+1,
+        this.setState((prevState) => ({
+            value: this.state.value + 1,
         }));
     }
     clickDecreaseHandler = () => {
         this.setState({
-            ...this.state,
-            value:(this.state.value>1)?this.state.value-1:0,
+            value: (this.state.value > 1) ? this.state.value - 1 : 0,
         });
     }
+
     componentDidUpdate() {
         this.props.onChange(this.state.value);
     }
+
     render() {
         const {value} = this.state;
         return (
