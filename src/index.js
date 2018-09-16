@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {combineReducers, createStore} from "redux";
+import Counter from "./components/Counter";
 
 const APPLY_FILTER = "applyFilder";
 const DROP_FILTER = "dropFilder";
@@ -118,6 +119,9 @@ export class ListOfItems extends Component {
 }
 
 export class App extends Component {
+    onChangeCounterHandler = (value) => {
+        console.log("COUNTER CHANGED ", value);
+    }
     render = () => {
         let words = ["Есть", "жизнь", "на", "Марсе"];
         let numbers = [1, 2, 3, 4, 5];
@@ -130,6 +134,7 @@ export class App extends Component {
 
         return (
             <div>
+                <Counter value={0} onChange={this.onChangeCounterHandler}/>
                 <input ref={elem => this.inputField = elem}/>
                 <input type="button" value="ADD" onClick={
                     () => {
