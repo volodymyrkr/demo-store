@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {combineReducers, createStore} from "redux";
 import Counter from "./components/Counter";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const APPLY_FILTER = "applyFilder";
 const DROP_FILTER = "dropFilder";
@@ -141,6 +143,7 @@ export class App extends Component {
         console.log(this.state);
         return (
             <div>
+                <Header/>
                 <Counter value={this.state.counterValue} onChange={this.onChangeCounterHandler}/>
                 <input ref={elem => this.inputField = elem}/>
                 <input type="button" value="ADD" onClick={
@@ -171,6 +174,7 @@ export class App extends Component {
                         }
                     </Fragment>
                 </div>
+                <Footer/>
             </div>
         )
     }

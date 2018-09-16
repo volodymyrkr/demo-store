@@ -1,7 +1,6 @@
 import React from 'react';
 
 function logProps(Component) {
-    console.log("LOGPROPS");
     class LogProps extends React.Component {
         componentWillReceiveProps(nextProps) {
             console.log("PROPS UPDATED", nextProps);
@@ -10,7 +9,7 @@ function logProps(Component) {
             return <Component {...this.props}/>
         }
     }
-    LogProps.displayName="LOGGGG";
+    LogProps.displayName="LogProps(${Component.name})";
     return LogProps;
 }
 
