@@ -119,10 +119,17 @@ export class ListOfItems extends Component {
 }
 
 export class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { counterValue: 1 };
+    }
     onChangeCounterHandler = (value) => {
         console.log("COUNTER CHANGED ", value);
+        this.setState({
+            counterValue: value
+        })
     }
-    render = () => {
+    render() {
         let words = ["Есть", "жизнь", "на", "Марсе"];
         let numbers = [1, 2, 3, 4, 5];
         let sums = [];
@@ -131,10 +138,10 @@ export class App extends Component {
                 sums.push(result);
                 return result + item;
             });
-
+        console.log(this.state);
         return (
             <div>
-                <Counter value={0} onChange={this.onChangeCounterHandler}/>
+                <Counter value={this.state.counterValue} onChange={this.onChangeCounterHandler}/>
                 <input ref={elem => this.inputField = elem}/>
                 <input type="button" value="ADD" onClick={
                     () => {
