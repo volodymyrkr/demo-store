@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {combineReducers, createStore} from "redux";
@@ -81,7 +81,7 @@ const filterReducer = (state = FILTER_ALL, action) => {
 const lastActionIndexReducer = (state = 1, action) => {
     switch (action.type) {
         case ADD_ITEM:
-            return state+1;
+            return state + 1;
         default:
             return state;
     }
@@ -89,7 +89,7 @@ const lastActionIndexReducer = (state = 1, action) => {
 
 const appReducer = combineReducers(
     {
-        lastActionIndex:lastActionIndexReducer,
+        lastActionIndex: lastActionIndexReducer,
         filter: filterReducer,
         actions: listReducer
     }
@@ -119,6 +119,15 @@ export class ListOfItems extends Component {
 
 export class App extends Component {
     render = () => {
+        let words = ["Есть", "жизнь", "на", "Марсе"];
+        let numbers = [1, 2, 3, 4, 5];
+        let sums = [];
+        numbers.reduce(
+            (result, item) => {
+                sums.push(result);
+                return result + item;
+            });
+
         return (
             <div>
                 <input ref={elem => this.inputField = elem}/>
@@ -136,6 +145,20 @@ export class App extends Component {
                 <ListOfItems items={store.getState().actions} onSelectItem={(itemId) => {
                     store.dispatch(selectItemAction(itemId))
                 }}/>
+                <div>
+                    <div><h5>Words</h5></div>
+                    <Fragment>
+                        {
+                            words.map((item, index) => (<div key={index}>{item} {item.length}</div>))
+                        }
+                    </Fragment>
+                    <div><h5>Sums</h5></div>
+                    <Fragment>
+                        {
+                            sums.map((item, index) => <div key={index}>{index + 1} {item}</div>)
+                        }
+                    </Fragment>
+                </div>
             </div>
         )
     }
