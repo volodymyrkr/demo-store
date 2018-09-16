@@ -5,10 +5,13 @@ class Counter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...props
+            ...props,
+            ...this.state
         }
     }
-
+    state = {
+        someStateItem: "Default Value"
+    }
     shouldComponentUpdate(nextProps, nextState) {
         return this.state.value !== nextState.value;
     }
@@ -29,9 +32,10 @@ class Counter extends Component {
     }
 
     render() {
-        const {value} = this.state;
+        const {someStateItem, value} = this.state;
         return (
             <div>
+                <span>{someStateItem}</span>
                 <input type='button' value='+' onClick={this.clickIncreaseHandler}/>
                 {value}
                 <input type='button' value='-' onClick={this.clickDecreaseHandler}/>

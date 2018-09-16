@@ -130,6 +130,16 @@ export class App extends Component {
         this.setState({
             counterValue: value
         })
+        let promise = new Promise((res,rej)=>{
+            setTimeout(() => {
+                res(new Error("время вышло!"));
+            }, 1000);
+        })
+        promise.then(()=>{
+            console.log('SUCCESS');
+        },()=>{
+            console.log('ERROR');
+        })
     }
     render() {
         let words = ["Есть", "жизнь", "на", "Марсе"];
